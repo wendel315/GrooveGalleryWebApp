@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+
+<head>
+    <title>Início - Groove Gallery</title>
+</head>
+<body style="background-color: #ced4da;">
+    <div class="container mt-5">
+        <h1 class="display-4">Bem-vindo a Groove Gallery</h1>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <p class="text-left pr-4">
+                    Groove Gallery é o seu destino definitivo para a música.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+
+        @if (TempData["TempMensagemSucesso"] != null)
+        {
+            <div class="alert alert-success mt-5"
+                 role="alert" style="width: 80%">
+                <h4 class="alert-heading">Sucesso!</h4>
+                Operação realizada com sucesso!
+            </div>
+        }
+
+        <div class="container mt-4">
+            <div class="row justify-content-md-center">
+                @foreach (var item in Model.ListaAlbum)
+                {
+                    <div class="col-md-4">
+                        <!-- Remova a classe mb-0 para manter a margem inferior padrão -->
+                        <div class="card mb-4" style="width: 18rem;">
+                            <!-- Ajuste a largura do card conforme necessário -->
+                            <img src="@item.ImagemUri" class="card-img-top img-fluid" style="border-radius: 25px; max-width: 100%; max-height: 300px; object-fit: cover;" alt="Imagem do Álbum">
+                            <!-- Adicione a classe img-fluid para tornar a imagem responsiva -->
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Nome</h5>
+                                <p class="card-text">@item.Descricao</p>
+                                <a class="btn btn-primary"
+                                   asp-page="/Details"
+                                   asp-route-id="@item.AlbumId"
+                                   asp-route-slug="@item.NomeSlug">Ver mais</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <footer class="fixed-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <hr class="my-4">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center">&copy; 2023 - GrooveGallery - <a asp-area="" asp-page="/Privacy">Privacy</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+</body>
