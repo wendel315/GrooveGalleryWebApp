@@ -1,5 +1,6 @@
 using GrooveGalleryWebApp.Models;
 using GrooveGalleryWebApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,23 +10,32 @@ using System.Linq;
 
 namespace GrooveGalleryWebApp.Pages
 {
+    [Authorize]
     public class EditModel : PageModel
     {
-        private IAlbumService _service;
 
-        public EditModel(IAlbumService albumService)
+        private IToastNotification _toastNotification;
+        private IAlbumService _service;
+        public SelectList MarcaOptionItems { get; set; }
+
+        public EditModel(IAlbumService albumService
+            , IToastNotification toastNotification)
         {
             _service = albumService;
+            _toastNotification = toastNotification;
         }
 
-        public void OnGet(int id)
-        {
-            Album = _service.Obter(id);
-        }
         
 
         [BindProperty]
         public Album Album { get; set; }
+        public void OnGet(int id)
+        {
+            Album = _service.Obter(id);
+            MarcaOptionItems = new SelectList(_service.ObterTodasAsMarcas(),
+                                                nameof(Marca.MarcaId),
+                                                nameof(Marca.Descricao));
+        }
 
         public IActionResult OnPost()
         {
@@ -37,6 +47,7 @@ namespace GrooveGalleryWebApp.Pages
 
             _service.Alterar(Album);
 
+            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
             return RedirectToPage("/Index");
         }
@@ -45,7 +56,7 @@ namespace GrooveGalleryWebApp.Pages
         {
             _service.Excluir(Album.AlbumId);
 
-            TempData["TempMensagemSucesso"] = true;
+            _toastNotification.AddSuccessToastMessage("Operação realizada com sucesso!");
 
             return RedirectToPage("/Index");
         }

@@ -19,10 +19,18 @@
             <li><label asp-for="Album.DataCadastro"></label>: @Html.DisplayFor(model => model.Album.DataCadastro)</li>
             <li><label asp-for="Album.Duracao"></label>: @Html.DisplayFor(model => model.Album.Duracao)</li>
             <li><label asp-for="Album.DataLancamento"></label>: @Html.DisplayFor(model => model.Album.DataLancamento)</li>
+            @if (Model.Marca is not null)
+            {
+                <li><label asp-for="Album.MarcaId"></label>: @Html.DisplayFor(model => model.Marca.Descricao)</li>
+            }
             <li><label asp-for="Album.Artista"></label>: @Model.Album.Artista</li>
         </ul>
-        <a class="btn my-3 btn-primary"
-           asp-page="Edit" asp-route-id="@Model.Album.AlbumId">Editar</a>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn my-3 btn-primary"
+               asp-page="Edit" asp-route-id="@Model.Album.AlbumId">Editar</a>
+        }
+        
     </div>
 
 </div>

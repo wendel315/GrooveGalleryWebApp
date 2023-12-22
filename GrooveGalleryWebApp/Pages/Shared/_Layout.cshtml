@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/GrooveGalleryWebApp.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <header>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="Index">Groove Gallery</a>
@@ -29,15 +30,21 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-page="/Privacy">Privacidade</a>
                     </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" asp-page="/Create">Album</a>
-                    </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Create">Album</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-page="/Marcas/Index">Marca</a>
+                            </li>
+                        }
                 </ul>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
+    </header>
 
     <div class="container">
         <main role="main" class="pb-3">

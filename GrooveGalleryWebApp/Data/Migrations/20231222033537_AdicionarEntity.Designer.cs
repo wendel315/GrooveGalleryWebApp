@@ -4,6 +4,7 @@ using GrooveGalleryWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GrooveGalleryWebApp.Data.Migrations
 {
     [DbContext(typeof(GrooveGalleryDbContext))]
-    partial class GrooveGalleryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231222033537_AdicionarEntity")]
+    partial class AdicionarEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

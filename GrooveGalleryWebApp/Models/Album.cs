@@ -52,6 +52,7 @@ namespace GrooveGalleryWebApp.Models
         [DisplayFormat(DataFormatString = "{0:MMMM \\de yyyy}")]
         public DateTime DataCadastro { get; set; }
 
+        [Display(Name = "Marca")]
         public int? MarcaId { get; set; }
 
     }
