@@ -31,6 +31,7 @@ namespace GrooveGalleryWebApp.Services.Data;
                 albumEncontrado.Duracao = album.Duracao;
                 albumEncontrado.DataLancamento = album.DataLancamento;
                 albumEncontrado.DataCadastro = album.DataCadastro;
+                albumEncontrado.MarcaId = album.MarcaId;
 
                 _context.SaveChanges();
             

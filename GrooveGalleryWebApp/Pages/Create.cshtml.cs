@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace GrooveGalleryWebApp.Pages
 {
-   
+    [Authorize]
     public class CreateModel : PageModel
     {
         private IAlbumService _service;
